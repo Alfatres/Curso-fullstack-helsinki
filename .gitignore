@@ -1,0 +1,12 @@
+# Ignorar la carpeta pesada de librerías de React
+part1/node_modules/
+
+# Ignorar todos los archivos sueltos de configuración de Vite/React
+part1/package.json
+part1/package-lock.json
+part1/vite.config.js
+part1/index.html
+part1/.oxlintrc.json
+part1/.gitignore
+part1/README.md
+part1/public/
