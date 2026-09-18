@@ -7,8 +7,9 @@ import Total from "./Total";
 const App = () => {
 
 
-const course ='Half Stack application development';
-const partes = [
+const course ={
+  name: 'Half Stack application development',
+ partes : [
   {
   name:'Fundamentals of React',
   exercises : 10,
@@ -21,17 +22,15 @@ const partes = [
   name : 'State of component',
   exercises : 14
 }
-];
+]};
 
 
-
-
-
-   return (
+return (
     <div>
       <Header coursee={course} />
-      <Content contenido={partes} />
-      <Total cantidad={partes}/>
+      <Content contenido={course} />
+      <Total cantidad={course}/>
+      
     </div>
   )
 }
