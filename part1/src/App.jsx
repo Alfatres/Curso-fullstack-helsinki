@@ -1,9 +1,23 @@
 //import { useState } from 'react'
 
-import Display from "./Display";
 import Button from "./Button";
 import { useState } from "react";
+import Display from "./Display";
 
+
+const Statics = (prop) =>{
+
+  return(
+    <div>
+      <p>good: {prop.good} </p>
+      <p>neutral: {prop.neutral} </p>
+      <p>bad: {prop.bad} </p>
+      <p>all:{prop.all} </p>
+      <p>average: {prop.avg} </p>
+      <p>positive: {prop.porcentaje} </p>
+    </div>
+  )
+}
 
 const App = () => {
 
@@ -19,12 +33,10 @@ console.log(`Nro de Bad: ${bad}`);
 const [all, setAll] = useState(0)
 console.log(`all of clicks: ${all}`);
 
-const [average, setAverage] = useState(0)
-console.log(`el average: ${average}`);
 
 
-const averag = (good-bad)/all
-const positive = (good*100)/all
+  const avg = (good-bad)/all
+  const porcentaje = (good*100)/all
 
 const handleGoodClicks = () => {
   const incrementoGood = good + 1
@@ -72,13 +84,9 @@ return (
       text='bad'
        />
      <h1>Statics</h1> 
-      <Display counter={good} text='good' />
-      <Display counter={neutral} text='neutral' />
-      <Display counter={bad} text='bad' />
-      <p>all: {all} </p>
-      <p>average: {averag} </p>
-      <p>positive: {positive}%</p>
-           
+
+      <Statics good={good} neutral={neutral} bad={bad} all={all} avg={avg} porcentaje={porcentaje} />
+                 
     </div>
   )
 }

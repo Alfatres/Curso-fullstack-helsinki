@@ -1,10 +1,9 @@
-const Display = ({counter, text}) => {
-
-    return (
+const Display = ({text, counter}) => {
+    return ( 
         <div>
-          {text}:  {counter}
+            {text}: {counter}
         </div>
-      );
-};
+     );
+}
  
 export default Display;
