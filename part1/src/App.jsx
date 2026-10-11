@@ -5,17 +5,45 @@ import { useState } from "react";
 import Display from "./Display";
 
 
-const Statics = (prop) =>{
+const Statistics = ({all, good, neutral, bad, avg, porcent }) =>{
 
   return(
-    <div>
-      <p>good: {prop.good} </p>
-      <p>neutral: {prop.neutral} </p>
-      <p>bad: {prop.bad} </p>
-      <p>all:{prop.all} </p>
-      <p>average: {prop.avg} </p>
-      <p>positive: {prop.porcentaje} </p>
-    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td>Good</td>
+          <td>{good}</td>
+        </tr>
+
+        <tr>
+          <td>Neutral</td>
+          <td>{neutral}</td>
+        </tr>
+
+        <tr>
+          <td>Bad</td>
+          <td>{bad}</td>
+        </tr>
+
+        <tr>
+          <td>All</td>
+          <td>{all}</td>
+        </tr>
+
+        <tr>
+          <td>Average</td>
+          <td>{avg}</td>
+        </tr>
+
+        <tr>
+          <td>Positive</td>
+          <td>{porcent}</td>
+        </tr>
+
+      </tbody>
+
+     </table>
+
   )
 }
 
@@ -35,8 +63,8 @@ console.log(`all of clicks: ${all}`);
 
 
 
-  const avg = (good-bad)/all
-  const porcentaje = (good*100)/all
+  const avg = all === 0 ? 0 : (good-bad)/all
+  const porcentaje = all === 0 ? 0 : (good*100)/all
 
 const handleGoodClicks = () => {
   const incrementoGood = good + 1
@@ -82,11 +110,15 @@ return (
       <Button
       onSmash={handleBadClicks}
       text='bad'
-       />
+       /> <br />
+
      <h1>Statics</h1> 
 
-      <Statics good={good} neutral={neutral} bad={bad} all={all} avg={avg} porcentaje={porcentaje} />
-                 
+      {all >= 10 ?
+        (<Statistics all={all} good={good} neutral={neutral} bad={bad} avg={avg} porcent={porcentaje} />)
+          :
+          ('No feedback given')
+      }       
     </div>
   )
 }
