@@ -5,120 +5,46 @@ import { useState } from "react";
 import Display from "./Display";
 
 
-const Statistics = ({all, good, neutral, bad, avg, porcent }) =>{
-
-  return(
-    <table>
-      <tbody>
-        <tr>
-          <td>Good</td>
-          <td>{good}</td>
-        </tr>
-
-        <tr>
-          <td>Neutral</td>
-          <td>{neutral}</td>
-        </tr>
-
-        <tr>
-          <td>Bad</td>
-          <td>{bad}</td>
-        </tr>
-
-        <tr>
-          <td>All</td>
-          <td>{all}</td>
-        </tr>
-
-        <tr>
-          <td>Average</td>
-          <td>{avg}</td>
-        </tr>
-
-        <tr>
-          <td>Positive</td>
-          <td>{porcent}</td>
-        </tr>
-
-      </tbody>
-
-     </table>
-
-  )
-}
 
 const App = () => {
 
-const [good, setGood] =useState(0)
-console.log(`Nro de Good: ${good}`);
-
-const [neutral, setNeutral] = useState(0)
-console.log(`Nro de Neutral: ${neutral}`);
-
-const [bad, setBad] = useState(0)
-console.log(`Nro de Bad: ${bad}`);
-
-const [all, setAll] = useState(0)
-console.log(`all of clicks: ${all}`);
-
-
-
-  const avg = all === 0 ? 0 : (good-bad)/all
-  const porcentaje = all === 0 ? 0 : (good*100)/all
-
-const handleGoodClicks = () => {
-  const incrementoGood = good + 1
-  setGood(incrementoGood)
-  console.log(`Cant of Good: ${incrementoGood}`);
-  setAll(incrementoGood+neutral+bad)
-
-}
-
-const handleNeutralClicks = () => {
-  const incrementoNeutral = neutral + 1
-  setNeutral(incrementoNeutral)
-  console.log(`cant of Neutral: ${incrementoNeutral}`);
-  setAll(incrementoNeutral+good+bad)
-
-}
-
-const handleBadClicks = () => {
-  const incrementoBad = bad + 1
-  setBad(incrementoBad)
-  console.log(`Cant of Bad ${incrementoBad}`);
-  setAll(incrementoBad+good+neutral)
-}
+const anecdotes = [
+    'If it hurts, do it more often.',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
+    'The only way to go fast, is to go well.'
+  ];
+  console.log('anecdotes:', anecdotes.length);
 
 
+const [selected, setSelected] = useState(() => anecdotes[Math.floor(Math.random() * anecdotes.length)])
+console.log(`Frase seleccionada: ${selected}`);
+console.log(`Indice seleccionado: ${anecdotes[0]} `);
+
+
+  
+const handleAnecdote = (array) => {
+//const opcion = anecdotes.filter(f => f !== selected);
+const indice = Math.floor(Math.random() * anecdotes.length);
+setSelected(anecdotes[indice]);
+};
 
 return (
     <div>
-      <h1>Give feedback</h1>
+      <h1>If it hurts, do it more often</h1>
            
       <Button 
-      onSmash={handleGoodClicks}
-      text='good'
+      onSmash={handleAnecdote}
+      text='Next anecdote'
       />
       <br />
-
-      <br />
-      <Button
-      onSmash={handleNeutralClicks}
-      text='neutral'
-      />
-      <br /><br />
-      <Button
-      onSmash={handleBadClicks}
-      text='bad'
-       /> <br />
-
-     <h1>Statics</h1> 
-
-      {all >= 10 ?
-        (<Statistics all={all} good={good} neutral={neutral} bad={bad} avg={avg} porcent={porcentaje} />)
-          :
-          ('No feedback given')
-      }       
+  
+    <p>{selected}</p>
+    
     </div>
   )
 }
