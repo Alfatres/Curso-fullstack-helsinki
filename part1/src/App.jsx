@@ -27,7 +27,10 @@ console.log(`Frase seleccionada: ${selected}`);
 const [vote, setVote] = useState(new Array(anecdotes.length).fill(0))
 console.log(`Cantidad de votos: ${vote}`);
 
- 
+const masVotado = Math.max(...vote)
+const indiceMax = vote.indexOf(masVotado)
+const mostVoted = anecdotes[indiceMax]
+
 const handleAnecdote = () => {
 const opcion = anecdotes.filter(f => f !== selected);
 const indice = Math.floor(Math.random() * opcion.length);
@@ -41,9 +44,10 @@ const handleVotes = () => {
   setVote(copyVote)
 }
 
+
 return (
     <div>
-
+      <h1>Anecdote the day</h1>
       <p>{selected}</p>
       <p>Has {vote[anecdotes.indexOf(selected)]} vote </p>
             
@@ -54,8 +58,15 @@ return (
       text='Next anecdote'
       />
       <br />
-  
-    
+      <h1>Anecdote with most votes</h1>
+      {masVotado > 0 ? (
+          <div>
+            <p>{mostVoted}</p>
+            <p>has {masVotado} vote </p>
+          </div>
+      ) : (
+        <p>No votes yet</p>
+      ) }
     
     </div>
   )
