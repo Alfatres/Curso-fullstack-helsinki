@@ -23,27 +23,39 @@ const anecdotes = [
 
 const [selected, setSelected] = useState(() => anecdotes[Math.floor(Math.random() * anecdotes.length)])
 console.log(`Frase seleccionada: ${selected}`);
-console.log(`Indice seleccionado: ${anecdotes[0]} `);
 
+const [vote, setVote] = useState(new Array(anecdotes.length).fill(0))
+console.log(`Cantidad de votos: ${vote}`);
 
-  
-const handleAnecdote = (array) => {
-//const opcion = anecdotes.filter(f => f !== selected);
-const indice = Math.floor(Math.random() * anecdotes.length);
-setSelected(anecdotes[indice]);
+ 
+const handleAnecdote = () => {
+const opcion = anecdotes.filter(f => f !== selected);
+const indice = Math.floor(Math.random() * opcion.length);
+setSelected(opcion[indice]);
 };
+
+const handleVotes = () => {
+  const indic = anecdotes.indexOf(selected);
+  const copyVote = [...vote];
+  copyVote[indic] += 1;
+  setVote(copyVote)
+}
 
 return (
     <div>
-      <h1>If it hurts, do it more often</h1>
-           
+
+      <p>{selected}</p>
+      <p>Has {vote[anecdotes.indexOf(selected)]} vote </p>
+            
+      <Button onSmash={handleVotes}
+      text='Vote'/>
       <Button 
       onSmash={handleAnecdote}
       text='Next anecdote'
       />
       <br />
   
-    <p>{selected}</p>
+    
     
     </div>
   )
